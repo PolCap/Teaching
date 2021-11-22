@@ -1,0 +1,279 @@
+---
+title: "The accelerated R Course"
+subtitle: "Challenge" 
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup1, include=FALSE}
+library(learnr)
+library(nycflights13)
+library(tidyverse)
+library(glmmTMB)
+library(DHARMa)
+library(MASS)
+library(fitdistrplus) 
+library(dplyr)
+#library(gradethis)
+#gradethis::gradethis_setup()
+#tutorial_options(exercise.checker = gradethis::gradethis_exercise_checker(),
+#                 exercise.error.check.code=gradethis::grade_code())
+
+knitr::opts_chunk$set(echo = FALSE)
+data("starwars", package = "dplyr")
+starwars <- starwars %>% dplyr::select(-sex)
+
+```
+
+## Introduction
+
+In today's assignment you are going to put in practice all the skills you have learned in the previous lessons. You will have a number of tasks that you will develop in groups of __five__ people. In total, you will have about 1h 30' to complete all the four tasks. Each task contains a number of exercises that you need to complete before solving the overall task. Once you have completed a task, please tell us and we will come to check whether it is correct or not. 
+Important, you won't be able to load packages, but we made sure you have all the necessary ones already loaded in this tutorial. 
+
+---
+
+<center>_The first group to complete each task will receive a little reward._</center>
+
+---
+
+
+## Task 1
+
+It is time for you to put a bit on practice your programming skills with R. In this task you are going to solve some specific exercises 
+
+### Exercice 1.1 
+
+* Write a function called `help` that when executed prints a message ("Help").
+
+```{r exercise1_1, exercise = TRUE,exercise.lines=10}
+
+
+
+
+
+```
+
+```{r exercise1_1-hint}
+function(x){
+  #your function
+  }
+```
+
+```{r exercise1_1-solution, exercise.reveal_solution = FALSE}
+help <- function(x){
+  print("help")
+  }
+
+help()
+
+```
+
+
+### Exercice 1.2 
+
+* Create a function that given a vector `random_vector` and an `integer` will return how many times that `integer` appears inside the vector.
+
+```{r exercise1_2, exercise = TRUE,exercise.lines=10}
+random_vector <- c(8,9,9,8,5,1,8,5,6,2,3,5,9,9,8)
+
+
+```
+
+### Exercice 1.3 
+
+* Create a function that given a `data frame`, and a `number` or `character`, it will return the `data frame` with the character or number changed to `NA`
+
+```{r exercise1_3, exercise = TRUE,exercise.lines=10}
+
+
+
+
+
+```
+
+### Exercice 1.4 
+
+* Use the commands `if` and `else` to return the pair numbers only from the given vector. If you are unsure how to use `if else`, you can check [this link](https://www.datamentor.io/r-programming/if-else-statement/)
+
+```{r exercise1_4, exercise = TRUE, ,exercise.lines=10}
+odds_even <- c(0,2,3,5,6,8,9)
+
+
+
+
+
+```
+<div id="exercise1_4-hint">
+**Hint:** To identify pair numbers you can use `x %% 2 == 0`.
+</div>
+
+## Task 2
+
+In this second task you will work with the [Living Planet database](https://livingplanetindex.org/data_portal), a database containing abundance time-series for wild vertebrate populations worldwide.  
+
+```{r data, message=FALSE,echo=FALSE, warning=FALSE}
+lpd <- read_csv("data/LivingPlanetIndex.csv")
+
+head(lpd)
+```
+
+As you can see, the database has five columns with metadata and from column 6 to 74 we have abundance data from the year 1950 to 2018. In the metadata we have: 
+
+- __ID__: The unique identification for each population. 
+- __Species__: The name of the species of that population. 
+- __Class__: The name of the taxonomic class of the species. 
+- __Country__: Country where the population was studied. 
+- __System__: Whether it was studied in a Marine, Freshwater or Terrestrial system. 
+
+Now that you understand the data a bit more, is time for you to reply to each of the following exercises. You can use the panels provided to run the code.  
+
+
+### Exercice 2.1
+
+```{r quiz2_1}
+quiz(
+  question("Which is the earliest year that the UK started to monitor vertebrate populations (according to the living planet index)?",
+    answer("1903"),
+    answer("1967"),
+    answer("1950", correct = TRUE),
+    answer("1953")
+  ))
+```
+
+
+```{r exercise2_1, exercise=TRUE,exercise.lines=10}
+lpd 
+
+
+```
+
+
+###  Exercise 2.2
+
+```{r quiz2_2}
+quiz(
+  question("Which is the latest year that the UK started to monitor vertebrate populations (according to the living planet index)?",
+    answer("2015", correct = TRUE),
+    answer("2018"),
+    answer("2016"),
+    answer("2017")
+  )
+)
+```
+
+```{r exercise2_2, exercise=TRUE, exercise.lines=10}
+lpd 
+
+```
+
+
+### Exercice 2.3
+
+```{r quiz2_3}
+quiz(
+  question("Which country has the the largest time-series?",
+    answer("United States"),
+    answer("Canada"),
+    answer("South Africa", correct = TRUE),
+    answer("Spain", correct = TRUE)
+  ))
+```
+
+```{r exercise2_3, exercise=TRUE,exercise.lines=10}
+
+
+```
+```{r exercise2_3-solution, exercise.reveal_solution = FALSE}
+lpd %>% 
+  pivot_longer(cols=6:74, 
+               names_to = "year") %>% 
+  filter(value!="NULL") %>% 
+  group_by(Country) %>% 
+  summarise(Duration=max(as.numeric(year))-min(as.numeric(year))) %>% 
+  select(Country, Duration) %>% 
+  arrange(desc(Duration))
+
+```
+
+
+## Task 3 
+
+In this task you will use the `starwars` data set. This data set contains morphological characteristics of the different characters appearing in the starwars movies (up to the 7th film).  
+
+In this task you will have to find what better explains the height of the characters in the movie. Try to test those physical characteristics that make more sense to be related with height. 
+
+```{r starwarsdata, eval=T}
+starwars
+
+```
+
+
+### Exercise 3.1 
+
+* Which is the best distribution fitting height data. 
+
+
+```{r exercise3_1, exercise=TRUE, exercise.lines=20}
+
+starwars
+
+```
+
+### Exercise 3.2 
+
+* Fit the appropriate model to the data and check its assumptions.
+
+```{r exercise3_2, exercise = TRUE,exercise.lines=20}
+
+
+```
+
+
+## Task 4
+
+__This is your final task! You are nearly there.__ 
+
+Using again the data set `starwars` we want to calculate the average height of man and women for each homeworlds. The wookies have produced some code that works "fine", but we would like to improve it in order to be more efficient.   
+
+### Exercise 4.1 
+
+* Correct the following code, by substituting the `for` loop for a vectorised version. 
+
+
+```{r exercise4_1, exercise=T, exercise.lines=20}
+
+average_height <- list()
+
+
+for(i in starwars$homeworld){
+  for(j in starwars$gender){
+    substar <- subset(starwars, homeworld==i&gender==j)
+    average <- mean(substar$height)
+  }
+}
+
+```
+
+### Exercise 4.2 
+
+* Can you do the same but using a parallelisation approach?
+
+
+```{r exercise4_2, exercise=T, exercise.lines=20}
+
+average_height <- list()
+for(i in starwars$homeworld){
+  for(j in starwars$gender){
+    substar <- subset(starwars, homeworld==i&gender==j)
+    average <- mean(substar$height)
+  }
+}
+
+```
+
+
+
+
