@@ -84,7 +84,7 @@ random_vector <- c(8,9,9,8,5,1,8,5,6,2,3,5,9,9,8)
 
 ### Exercice 1.3 
 
-* Create a function that given a `data frame`, and a `number` or `character`, it will return the `data frame` with the character or number changed to `NA`
+* Create a function that when given a `data frame`, and a specific `number` or `character`, will return the `data frame` with that character or number changed to `NA`
 
 ```{r exercise1_3, exercise = TRUE,exercise.lines=10}
 
@@ -96,7 +96,7 @@ random_vector <- c(8,9,9,8,5,1,8,5,6,2,3,5,9,9,8)
 
 ### Exercice 1.4 
 
-* Use the commands `if` and `else` to return the pair numbers only from the given vector. If you are unsure how to use `if else`, you can check [this link](https://www.datamentor.io/r-programming/if-else-statement/)
+* Use the commands `if` and `else` to return the even numbers only from the given vector. If you are unsure how to use `if else`, you can check [this link](https://www.datamentor.io/r-programming/if-else-statement/)
 
 ```{r exercise1_4, exercise = TRUE, ,exercise.lines=10}
 odds_even <- c(0,2,3,5,6,8,9)
