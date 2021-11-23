@@ -10,7 +10,6 @@ runtime: shiny_prerendered
 
 ```{r setup1, include=FALSE}
 library(learnr)
-library(nycflights13)
 library(tidyverse)
 library(glmmTMB)
 library(DHARMa)
@@ -23,19 +22,17 @@ library(dplyr)
 #                 exercise.error.check.code=gradethis::grade_code())
 
 knitr::opts_chunk$set(echo = FALSE)
-data("starwars", package = "dplyr")
-starwars <- starwars %>% dplyr::select(-sex)
-
 ```
 
 ## Introduction
 
-In today's assignment you are going to put in practice all the skills you have learned in the previous lessons. You will have a number of tasks that you will develop in groups of __five__ people. In total, you will have about 1h 30' to complete all the four tasks. Each task contains a number of exercises that you need to complete before solving the overall task. Once you have completed a task, please tell us and we will come to check whether it is correct or not. 
-Important, you won't be able to load packages, but we made sure you have all the necessary ones already loaded in this tutorial. 
+In today's assignment you are going to put in practice all the skills you have learned in the previous lessons. You will have a number of tasks to complete in 1h 30' by working in groups of __five__ people.
+
+Each task contains a number of exercises that you need to solve before completing the overall task. Some of the tasks contain data that you can download [in this link](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data) (the links will also be provided in each exercise) and run in your computer. You will also have some space to run the code within the  Once you have completed a task, please tell us and we will come to check whether it is correct or not. 
 
 ---
 
-<center>_The first group to complete each task will receive a little reward._</center>
+<center>__The first group to complete each task will receive a little reward.__</center>
 
 ---
 
@@ -61,16 +58,6 @@ function(x){
   #your function
   }
 ```
-
-```{r exercise1_1-solution, exercise.reveal_solution = FALSE}
-help <- function(x){
-  print("help")
-  }
-
-help()
-
-```
-
 
 ### Exercice 1.2 
 
@@ -112,7 +99,7 @@ odds_even <- c(0,2,3,5,6,8,9)
 
 ## Task 2
 
-In this second task you will work with the [Living Planet database](https://livingplanetindex.org/data_portal), a database containing abundance time-series for wild vertebrate populations worldwide.  
+In this second task you will work with the [Living Planet database](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data), a database containing abundance time-series for wild vertebrate populations worldwide.  
 
 ```{r data, message=FALSE,echo=FALSE, warning=FALSE}
 lpd <- read_csv("data/LivingPlanetIndex.csv")
@@ -186,39 +173,44 @@ quiz(
 
 
 ```
-```{r exercise2_3-solution, exercise.reveal_solution = FALSE}
-lpd %>% 
-  pivot_longer(cols=6:74, 
-               names_to = "year") %>% 
-  filter(value!="NULL") %>% 
-  group_by(Country) %>% 
-  summarise(Duration=max(as.numeric(year))-min(as.numeric(year))) %>% 
-  select(Country, Duration) %>% 
-  arrange(desc(Duration))
-
-```
-
 
 ## Task 3 
 
-In this task you will use the `starwars` data set. This data set contains morphological characteristics of the different characters appearing in the starwars movies (up to the 7th film).  
+In this task you will use the `foxes.csv` data set which contains data on urban fox groups in England. [Link here](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data). 
 
-In this task you will have to find what better explains the height of the characters in the movie. Try to test those physical characteristics that make more sense to be related with height. 
-
-```{r starwarsdata, eval=T}
-starwars
+```{r foxesdata, eval=T,warning=FALSE}
+foxes <- read_csv("data/foxes.csv")
+foxes
 
 ```
 
 
+As you probably already know, the urban fox (_Vulpes vulpes_) is a successful exploiter of human habitat. Since urban foxes move in packs and defend territories, data on habitat quality and population density is also included. The data frame has five columns:
+
+- __group__: Number of the social group the individual fox belongs to
+- __avgfood__: The average amount of food available in the territory
+- __groupsize__: The number of foxes in the social group
+- __area__: Size of the territory
+- __weight__: Body weight of the individual fox
+
+In this task you will have to find which are the best predictors for fox body weight. 
+
 ### Exercise 3.1 
 
-* Which is the best distribution fitting height data. 
+```{r quiz3_1}
+quiz(
+  question("Which is the best distribution for `weight` data?",
+    answer("Poisson"),
+    answer("Binomial"),
+    answer("Gaussian", correct = TRUE),
+    answer("Negative binomial")
+  ))
+```
 
+* __Note__: You will have to justify your choice. 
 
 ```{r exercise3_1, exercise=TRUE, exercise.lines=20}
 
-starwars
 
 ```
 
@@ -236,7 +228,8 @@ starwars
 
 __This is your final task! You are nearly there.__ 
 
-Using again the data set `starwars` we want to calculate the average height of man and women for each homeworlds. The wookies have produced some code that works "fine", but we would like to improve it in order to be more efficient.   
+
+In this task you will use the `starwars` data set, [link here](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data). This data set contains morphological characteristics of the different characters appearing in the starwars movies (up to the 7th film). We want to calculate the average height of man and women for each homeworlds. The wookies have produced some code that works "fine", but we would like to improve it in order to be more efficient.   
 
 ### Exercise 4.1 
 
@@ -274,6 +267,17 @@ for(i in starwars$homeworld){
 
 ```
 
+### Bonus
+
+* Can you think of an alternative to the ones we suggested in this exercise? 
+
+
+```{r exercisebonus, exercise=T, exercise.lines=20}
+
+
+
+
+```
 
 
 
