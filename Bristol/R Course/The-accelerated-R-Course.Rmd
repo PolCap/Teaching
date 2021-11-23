@@ -1,6 +1,7 @@
 ---
 title: "The accelerated R Course"
-subtitle: "Challenge" 
+subtitle: "Challenges" 
+author: "Pol Capdevila"
 output: 
   learnr::tutorial:
     progressive: true
@@ -22,6 +23,7 @@ library(dplyr)
 #                 exercise.error.check.code=gradethis::grade_code())
 
 knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 ```
 
 ## Introduction
@@ -122,7 +124,7 @@ Now that you understand the data a bit more, is time for you to reply to each of
 
 ```{r quiz2_1}
 quiz(
-  question("Which is the earliest year that the UK started to monitor vertebrate populations (according to the living planet index)?",
+  question("What is the earliest year that the UK started to monitor the abundance of a population of vertebrates (according to the living planet index)?",
     answer("1903"),
     answer("1967"),
     answer("1950", correct = TRUE),
@@ -142,7 +144,7 @@ lpd
 
 ```{r quiz2_2}
 quiz(
-  question("Which is the latest year that the UK started to monitor vertebrate populations (according to the living planet index)?",
+  question("What is the most recent year that the UK started monitoring a new population (according to the living planet index)?",
     answer("2015", correct = TRUE),
     answer("2018"),
     answer("2016"),
@@ -161,7 +163,7 @@ lpd
 
 ```{r quiz2_3}
 quiz(
-  question("Which country has the the largest time-series?",
+  question("Which country has the the longest time-series?",
     answer("United States"),
     answer("Canada"),
     answer("South Africa", correct = TRUE),
@@ -210,16 +212,16 @@ quiz(
 * __Note__: You will have to justify your choice. 
 
 ```{r exercise3_1, exercise=TRUE, exercise.lines=20}
-
+foxes
 
 ```
 
 ### Exercise 3.2 
 
-* Fit the appropriate model to the data and check its assumptions.
+* Fit a model which will allow you to determine which of the four predictor variables has the strongest influence on the body size of foxes. 
 
 ```{r exercise3_2, exercise = TRUE,exercise.lines=20}
-
+foxes
 
 ```
 
@@ -229,11 +231,11 @@ quiz(
 __This is your final task! You are nearly there.__ 
 
 
-In this task you will use the `starwars` data set, [link here](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data). This data set contains morphological characteristics of the different characters appearing in the starwars movies (up to the 7th film). We want to calculate the average height of man and women for each homeworlds. The wookies have produced some code that works "fine", but we would like to improve it in order to be more efficient.   
+In this task you will use the `starwars` data set, [link here](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data). This data set contains morphological characteristics of the different characters appearing in the Starwars movies (up to the 7th film). We want to calculate the average height of men and women for each of the homeworlds. The wookies have produced some code that works "fine", but we would like to improve it in order to be more efficient.   
 
 ### Exercise 4.1 
 
-* Correct the following code, by substituting the `for` loop for a vectorised version. 
+* Re-write the following code using lapply():
 
 
 ```{r exercise4_1, exercise=T, exercise.lines=20}
@@ -252,7 +254,7 @@ for(i in starwars$homeworld){
 
 ### Exercise 4.2 
 
-* Can you do the same but using a parallelisation approach?
+* Achieve the same result using the tidyverse functions:
 
 
 ```{r exercise4_2, exercise=T, exercise.lines=20}
@@ -266,18 +268,5 @@ for(i in starwars$homeworld){
 }
 
 ```
-
-### Bonus
-
-* Can you think of an alternative to the ones we suggested in this exercise? 
-
-
-```{r exercisebonus, exercise=T, exercise.lines=20}
-
-
-
-
-```
-
 
 
