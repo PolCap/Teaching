@@ -163,7 +163,7 @@ lpd
 
 ```{r quiz2_3}
 quiz(
-  question("Which country has the the longest time-series?",
+  question("Which country/ies has the the longest time-series?",
     answer("United States"),
     answer("Canada"),
     answer("South Africa", correct = TRUE),
