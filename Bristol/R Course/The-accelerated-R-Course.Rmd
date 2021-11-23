@@ -1,7 +1,6 @@
 ---
 title: "The accelerated R Course"
 subtitle: "Challenges" 
-author: "Pol Capdevila"
 output: 
   learnr::tutorial:
     progressive: true
