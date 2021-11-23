@@ -30,7 +30,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 In today's assignment you are going to put in practice all the skills you have learned in the previous lessons. You will have a number of tasks to complete in 1h 30' by working in groups of __five__ people.
 
-Each task contains a number of exercises that you need to solve before completing the overall task. Some of the tasks contain data that you can download [in this link](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data) (the links will also be provided in each exercise) and run in your computer. You will also have some space to run the code within the  Once you have completed a task, please tell us and we will come to check whether it is correct or not. 
+Each task contains a number of exercises that you need to solve before completing the overall task. Some of the tasks contain data that you can download [in this link](https://github.com/PolCap/Teaching/tree/master/Bristol/R%20Course/data) (the links will also be provided in each exercise). It will be easier for you to run the code in your computer, only using r packages that you have seen in this course. You will also have some space to run the code in the boxes provided in this document. You can run the code as many times as you want but please paste only the correct answers when we come to check. Once you have completed a task, please raise your hand and we will come to check whether it is correct or not.  
 
 ---
 
@@ -266,6 +266,15 @@ for(i in starwars$homeworld){
     average <- mean(substar$height)
   }
 }
+
+```
+
+### Exercise 4.3 
+
+* Plot the mean values for each homeworld and gender along with their standard errors:
+
+```{r exercise4_3, exercise=T, exercise.lines=20}
+starwars
 
 ```
 
